@@ -15,7 +15,7 @@
 <img src="demo.gif" width="650px"/><br/>
 <img src="down-arrow.png" width="50px"/><br/>
 ```javascript
-// latest annotaions: 
+// latest annotations: 
 [
     {
         "word": "James", 
