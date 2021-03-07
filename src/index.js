@@ -3,7 +3,7 @@ const defaultOptions = {
     annotations: [],
     color: "#577eba"
 }
-class EasyTextLabelingBox {
+class EasySequenceLabelingBox {
     #box
     #text
     #color
@@ -120,7 +120,7 @@ class EasyTextLabelingBox {
             }
             headHtmlStr += `<span data-label="${label.value}" class="label" style="border-color: ${this.#color}">${labelHtmlStr}</span>`
         }
-        headHtmlStr = `<div class="easy_text_labeling_box_head">${headHtmlStr}</div>`
+        headHtmlStr = `<div class="easy_sequence_labeling_box_head">${headHtmlStr}</div>`
         let bodyHtmlStr = ""
         for (const chunk of chunks) {
             if (chunk.type == "text") {
@@ -130,7 +130,7 @@ class EasyTextLabelingBox {
                 bodyHtmlStr += `<span class="annotation" style="border-color: ${this.#color};">
                                     <span class="annotation_word">
                                         ${chunk.content}
-                                        <button class="annotation_delete" data-word="${chunk.content}">
+                                        <button class="annotation_delete" data-word="${chunk.content.trim()}">
                                         </button>
                                     </span>
                                     <span class="annotation_label"
@@ -140,8 +140,8 @@ class EasyTextLabelingBox {
                                  </span>`
             }
         }
-        bodyHtmlStr = `<div class="easy_text_labeling_box_body">${bodyHtmlStr}</div>`
-        const renderHtml = `<div class="easy_text_labeling_box">${headHtmlStr}${bodyHtmlStr}</div>`
+        bodyHtmlStr = `<div class="easy_sequence_labeling_box_body">${bodyHtmlStr}</div>`
+        const renderHtml = `<div class="easy_sequence_labeling_box">${headHtmlStr}${bodyHtmlStr}</div>`
         return renderHtml
     }
     #renderHtml = html => {
@@ -199,5 +199,5 @@ class EasyTextLabelingBox {
         return this.#annotations
     }
 }
-window.EasyTextLabelingBox = EasyTextLabelingBox
-export default EasyTextLabelingBox
+window.EasySequenceLabelingBox = EasySequenceLabelingBox
+export default EasySequenceLabelingBox

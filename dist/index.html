@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <title>Development demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="easyTextLabelingBox.min.js"></script>
+    <script src="easySequenceLabelingBox.min.js"></script>
 </head>
 <body>
     <div id="demo"></div>
@@ -17,14 +17,14 @@
                 "word": "James",
                 "label": "name",
             },
-            {
-                "word": "basketball",
-                "label": "sports"
-            },
-            {
-                "word": "hamburger",
-                "label": "food"
-            }
+            // {
+            //     "word": "basketball",
+            //     "label": "sports"
+            // },
+            // {
+            //     "word": "hamburger",
+            //     "label": "food"
+            // }
         ]
         const labels = [
             {
@@ -36,23 +36,28 @@
                 "keypress": "s"
             },
             {
+                "value": "emoji",
+                "keypress": "e"
+            },
+            {
                 "value": "food"
             },
         ]
 
-        const text = "James is a basketball player, he likes eating hamburger since he was a child, now he is a basketball star."
+        const text = "James is a basketball player, he likes eating hamburger since he was a child, now he is a basketball 🏀  star."
         
         const color = "#577eba"
-        const easyTextLabelingBox = new EasyTextLabelingBox({
+
+        const easySequenceLabelingBox = new EasySequenceLabelingBox({
             container: document.getElementById("demo"),
             text,
-            // annotations,
+            annotations,
             labels,
             // color
         })
 
         document.getElementById("button").addEventListener('click', () => {
-            document.getElementById('annotaions').innerText = JSON.stringify(easyTextLabelingBox.getAnnotations())
+            document.getElementById('annotaions').innerText = JSON.stringify(easySequenceLabelingBox.getAnnotations())
         })
     }
 </script>

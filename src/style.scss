@@ -1,6 +1,6 @@
-.easy_text_labeling_box {
+.easy_sequence_labeling_box {
   box-shadow: 0 2px 3px rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 10%);
-  .easy_text_labeling_box_head {
+  .easy_sequence_labeling_box_head {
     padding: 10px 10px 5px 10px;
     border-bottom: 1px solid rgb(222 222 222);
     .label {
@@ -18,10 +18,11 @@
       }
     }
   }
-  .easy_text_labeling_box_body {
+  .easy_sequence_labeling_box_body {
     line-height: 2;
     padding: 10px;
     .annotation {
+      margin-right: 5px;
       line-height: 1.3;
       border: 2px solid;
       box-shadow: 2px 4px 20px rgb(0 0 0 / 10%);
