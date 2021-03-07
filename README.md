@@ -11,9 +11,9 @@
     }
 ] 
 ```
-<span style="color:#577eba;font-size:4em;">↓</span><br/>
-<img src="./gif/demo.gif" width="650px"/><br/>
-<span style="color:#577eba;font-size:4em;" >↓</span><br/>
+<img src="down-arrow.png" width="50px"/><br/>
+<img src="demo.gif" width="650px"/><br/>
+<img src="down-arrow.png" width="50px"/><br/>
 ```javascript
 // latest annotaions: 
 [
