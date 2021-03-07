@@ -1,11 +1,12 @@
-.easy_labeling_box {
+.easy_text_labeling_box {
   box-shadow: 0 2px 3px rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 10%);
-  .easy_labeling_box_head {
-    padding: 10px;
+  .easy_text_labeling_box_head {
+    padding: 10px 10px 5px 10px;
     border-bottom: 1px solid rgb(222 222 222);
     .label {
       display: inline-block;
       margin-right: 10px;
+      margin-bottom: 5px;
       border: 2px solid;
       cursor: pointer;
       .label_value {
@@ -15,79 +16,45 @@
         padding: 0px 2px 2px 2px;
         border-left: 2px solid;
       }
-      &::after {
-        content: attr(data-keypress);
-      }
     }
   }
-  .easy_labeling_box_body {
-    padding: 10px 7px;
-    line-height: 42px!important;
-    display: flex;
-    flex-wrap: wrap;
-    white-space: pre-wrap;
-    cursor: default;
-    align-items: flex-start;
+  .easy_text_labeling_box_body {
+    line-height: 2;
+    padding: 10px;
     .annotation {
+      line-height: 1.3;
       border: 2px solid;
-      margin: 4px 6px 4px 3px;
       box-shadow: 2px 4px 20px rgb(0 0 0 / 10%);
       position: relative;
-      cursor: default;
-      min-width: 26px;
-      line-height: 22px;
-      display: block;
-      white-space: normal;
+      display: inline-block;
       &:hover .annotation_delete{
         display: block;
       }
       .annotation_word {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        padding: 2px 2px 0px 2px;
+        padding-left: 3px;
       }
-      .annotation_label {
-        line-height: 14px;
-        padding-top: 1px;
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        padding: 0 8px;
-        text-align: center;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        color: white;
-        &::after {
-          content: attr(data-label);
-          display: block;
-          font-size: 14px;
-          -webkit-font-smoothing: subpixel-antialiased;
-          letter-spacing: .1em;
-        }
+      .annotation_label{
+        padding-left: 2px;
       }
       .annotation_delete {
-        top: -11px;
-        left: -11px;
+        top: -9px;
+        left: -9px;
         position: absolute;
         display: none;
         border-radius: 50%;
         padding: 3px;
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
         background-color: rgba(0, 0, 0, 0.54);
         border: none;
         &::before {
           content: "×";
           position: absolute;
           display: block;
-          /* width: 24px; */
           color: #ffffff;
-          font-size: 21px;
+          font-size: 18px;
           top: -1px;
-          left: 4px;
+          left: 3px;
           height: 24px;
         }
         &:hover {

@@ -3,7 +3,7 @@ const defaultOptions = {
     annotations: [],
     color: "#41b883"
 }
-class EasyLabelingBox {
+class EasyTextLabelingBox {
     #box
     #text
     #color
@@ -12,7 +12,7 @@ class EasyLabelingBox {
     #selectingWord
     constructor(options) {
         options = Object.assign({}, defaultOptions, options)
-        const {container, text, annotations, labels, color} = options
+        const { container, text, annotations, labels, color } = options
         this.#box = container
         this.#text = text
         this.#labels = labels
@@ -102,9 +102,9 @@ class EasyLabelingBox {
             hexcolor = hexcolor.slice(1)
         }
         // Convert to RGB value
-        var r = parseInt(hexcolor.substr(0,2),16)
-        var g = parseInt(hexcolor.substr(2,2),16)
-        var b = parseInt(hexcolor.substr(4,2),16)
+        var r = parseInt(hexcolor.substr(0, 2), 16)
+        var g = parseInt(hexcolor.substr(2, 2), 16)
+        var b = parseInt(hexcolor.substr(4, 2), 16)
         // Get YIQ ratio
         var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000
         // Check contrast
@@ -120,27 +120,29 @@ class EasyLabelingBox {
             }
             headHtmlStr += `<span data-label="${label.value}" class="label" style="border-color: ${this.#color}">${labelHtmlStr}</span>`
         }
-        headHtmlStr = `<div class="easy_labeling_box_head">${headHtmlStr}</div>`
-        let bodyRenderHtml = ""
+        headHtmlStr = `<div class="easy_text_labeling_box_head">${headHtmlStr}</div>`
+        let bodyHtmlStr = ""
         for (const chunk of chunks) {
             if (chunk.type == "text") {
-                bodyRenderHtml += `<span>${chunk.content}</span>`
+                bodyHtmlStr += `<span>${chunk.content}</span>`
             }
             if (chunk.type == "annotation") {
-                bodyRenderHtml += `<span class="annotation" style="border-color: ${this.#color};">
+                bodyHtmlStr += `<span class="annotation" style="border-color: ${this.#color};">
                                     <span class="annotation_word">
                                         ${chunk.content}
                                         <button class="annotation_delete" data-word="${chunk.content}">
                                         </button>
                                     </span>
-                                    <span data-label="${chunk.label}" class="annotation_label"
+                                    <span class="annotation_label"
                                         style="background-color: ${this.#color}; color: ${this.#getContrastColor(this.#color)};">
+                                        ${chunk.label}
                                     </span>
                                  </span>`
             }
         }
-        bodyRenderHtml = `<div class="easy_labeling_box_body">${bodyRenderHtml}</div>`
-        return headHtmlStr + bodyRenderHtml
+        bodyHtmlStr = `<div class="easy_text_labeling_box_body">${bodyHtmlStr}</div>`
+        const renderHtml = `<div class="easy_text_labeling_box">${headHtmlStr}${bodyHtmlStr}</div>`
+        return renderHtml
     }
     #renderHtml = html => {
         this.#box.innerHTML = html
@@ -197,5 +199,5 @@ class EasyLabelingBox {
         return this.#annotations
     }
 }
-window.EasyLabelingBox = EasyLabelingBox
-export default EasyLabelingBox
+window.EasyTextLabelingBox = EasyTextLabelingBox
+export default EasyTextLabelingBox

@@ -3,10 +3,10 @@
     <meta charset="utf-8">
     <title>Development demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script defer="" src="easyLabelingBox.js"></script>
+    <script src="easyTextLabelingBox.min.js"></script>
 </head>
 <body>
-    <div id="demo" class="easy_labeling_box"></div>
+    <div id="demo"></div>
     <button id="button">getLatestAnnotaions</button>
     <div id="annotaions"></div>
 </body>
@@ -43,7 +43,7 @@
         const text = "James is a basketball player, he likes eating hamburger since he was a child, now he is a basketball star."
         
         const color = "#577eba"
-        const easyLabelingBox = new EasyLabelingBox({
+        const easyTextLabelingBox = new EasyTextLabelingBox({
             container: document.getElementById("demo"),
             text,
             // annotations,
@@ -52,7 +52,7 @@
         })
 
         document.getElementById("button").addEventListener('click', () => {
-            document.getElementById('annotaions').innerText = JSON.stringify(easyLabelingBox.getAnnotations())
+            document.getElementById('annotaions').innerText = JSON.stringify(easyTextLabelingBox.getAnnotations())
         })
     }
 </script>
