@@ -3,7 +3,7 @@
 
 ### Concept
 ```javascript
-// initial annations:
+// initial annotations:
 [
     {
         "word": "James",
