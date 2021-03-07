@@ -1,7 +1,7 @@
 import './style.scss'
 const defaultOptions = {
     annotations: [],
-    color: "#41b883"
+    color: "#577eba"
 }
 class EasyTextLabelingBox {
     #box
