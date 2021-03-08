@@ -130,7 +130,7 @@ class EasySequenceLabelingBox {
                 bodyHtmlStr += `<span class="annotation" style="border-color: ${this.#color};">
                                     <span class="annotation_word">
                                         ${chunk.content}
-                                        <button class="annotation_delete" data-word="${chunk.content.trim()}">
+                                        <button class="annotation_delete" data-word="${chunk.content.trim()}">x
                                         </button>
                                     </span>
                                     <span class="annotation_label"
