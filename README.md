@@ -36,7 +36,7 @@
 [Try!](https://codesandbox.io/s/easy-sequence-labeling-box-igykl?file=/index.html)
 
 ### How to use: 
-```javascript
+```html
 <script src="https://raw.githack.com/HC200ok/easy-sequence-labeling-box/master/dist/easySequenceLabelingBox.min.js"></script>
 <body>
     <div id="demo"></div>
