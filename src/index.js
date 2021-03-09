@@ -162,6 +162,11 @@ class EasySequenceLabelingBox {
                 this.#annotations = this.#annotations.filter(item => item.word != word)
                 this.#renderAnnotationHtml(this.#annotations, this.#labels, this.#text)
             }
+        })
+
+        this.#box.addEventListener("mousedown", e => {
+            e = e || window.event;
+            const target = e.target || e.srcElement;
             if (target.parentNode && target.parentNode.classList.contains("label")) {
                 const label = target.parentNode.getAttribute("data-label")
                 if (this.#selectingWord && this.#selectingWord != "" && label) {
@@ -180,7 +185,7 @@ class EasySequenceLabelingBox {
                 : document.selection.createRange().text;
             word = word + "";
             word = word.replace(/^\s+|\s+$/g, "");
-            if (word != "") this.#selectingWord = word
+            this.#selectingWord = word.trim().length ? word : null
         })
 
         document.addEventListener('keyup', e => {
