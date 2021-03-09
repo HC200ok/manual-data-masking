@@ -43,7 +43,19 @@ class EasySequenceLabelingBox {
             entitiesInfos = entitiesInfos.concat(entityInfos)
         }
         // sort by start_offset
-        return entitiesInfos.slice().sort((a, b) => a.start_offset - b.start_offset)
+        entitiesInfos = entitiesInfos.slice().sort((a, b) => a.start_offset - b.start_offset)
+        // filter duplicate start_offset
+        entitiesInfos = entitiesInfos.reduce((acc, current) => {
+          const i = acc.findIndex(item => item.start_offset === current.start_offset);
+          if (i == -1) {
+            return acc.concat([current])
+          } else {
+            if (acc[i].word.length < current.word.length) acc[i] = current
+            return acc
+          }
+        }, [])
+
+        return entitiesInfos
     }
     #makeTextChunks = text => {
         let chunks = []
