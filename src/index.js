@@ -77,7 +77,7 @@ class EasySequenceLabelingBox {
         let chunks = []
         let startOffset = 0
         // to count the number of characters correctly.
-        const characters = [...text]
+        const characters = text.split('')
         for (const entity of entities) {
             // add non-entities to chunks.
             let piece = characters.slice(startOffset, entity.start_offset).join('')
