@@ -126,7 +126,7 @@ class EasySequenceLabelingBox {
         let headHtmlStr = ""
         for (const label of labels) {
             let labelHtmlStr = ""
-            labelHtmlStr += `<span class="label_value">${label.value}</span>`
+            labelHtmlStr += `<span class="label_value" style="background-color: ${this.#color}; color: ${this.#getContrastColor(this.#color)}">${label.value}</span>`
             if (label.keypress) {
                 labelHtmlStr += `<span class="label_keypress" style="border-color: ${this.#color}">${label.keypress}</span>`
             }
@@ -163,6 +163,7 @@ class EasySequenceLabelingBox {
         const entities = this.#initEntities(text, annotations)
         const chunks = this.#makeChunks(text, entities)
         const html = this.#makeRenderHtml(chunks, lables)
+
         this.#renderHtml(html)
     }
     #bindEvents = () => {
