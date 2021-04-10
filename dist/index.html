@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <title>Development demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="easySequenceLabelingBox.min.js"></script>
+    <script src="easyTextAnnotationBox.min.js"></script>
 </head>
 <body>
     <div id="demo"></div>
@@ -48,7 +48,7 @@
         
         const color = "#577eba"
 
-        const easySequenceLabelingBox = new EasySequenceLabelingBox({
+        const easyTextAnnotationBox = new EasyTextAnnotationBox({
             container: document.getElementById("demo"),
             text,
             annotations,
@@ -57,7 +57,7 @@
         })
 
         document.getElementById("button").addEventListener('click', () => {
-            document.getElementById('annotaions').innerText = JSON.stringify(easySequenceLabelingBox.getAnnotations())
+            document.getElementById('annotaions').innerText = JSON.stringify(easyTextAnnotationBox.getAnnotations())
         })
     }
 </script>

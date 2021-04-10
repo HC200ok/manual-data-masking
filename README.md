@@ -1,6 +1,6 @@
-# easy-sequence-labeling-box
+# easy-text-annotation-box
 
-> It's an easy javascript plugin for sequence labeling, supporting key shortcuts for faster labeling.
+> It's an easy javascript plugin for mannual text annotation, supporting key shortcuts for faster labeling.
 
 ### Concept
 
@@ -43,7 +43,7 @@
 ### How to use:
 
 ```html
-<script src="https://raw.githack.com/HC200ok/easy-sequence-labeling-box/master/dist/easySequenceLabelingBox.min.js"></script>
+<script src="https://raw.githack.com/HC200ok/easy-text-annotation-box/master/dist/easyTextAnnotationBox.min.js"></script>
 <body>
   <div id="demo"></div>
 </body>
@@ -78,7 +78,7 @@
 
     const color = "#577eba";
 
-    const easySequenceLabelingBox = new EasySequenceLabelingBox({
+    const easyTextAnnotationBox = new EasyTextAnnotationBox({
       container: document.getElementById("demo"),
       text,
       annotations, // optional
@@ -87,7 +87,7 @@
     });
 
     // axios.post('/XXXX', {
-    //     parameters: easySequenceLabelingBox.getAnnotations(),
+    //     parameters: easyTextAnnotationBox.getAnnotations(),
     // }).then(function (response) {
     //     XXXXX
     // }).catch(function (error) {

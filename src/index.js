@@ -3,7 +3,7 @@ const defaultOptions = {
     annotations: [],
     color: "#577eba"
 }
-class EasySequenceLabelingBox {
+class EasyTextAnnotationBox {
     #box
     #text
     #color
@@ -132,7 +132,7 @@ class EasySequenceLabelingBox {
             }
             headHtmlStr += `<span data-label="${label.value}" class="label" style="border-color: ${this.#color}">${labelHtmlStr}</span>`
         }
-        headHtmlStr = `<div class="easy_sequence_labeling_box_head">${headHtmlStr}</div>`
+        headHtmlStr = `<div class="easy_text_annotation_box_head">${headHtmlStr}</div>`
         let bodyHtmlStr = ""
         for (const chunk of chunks) {
             if (chunk.type == "text") {
@@ -152,8 +152,8 @@ class EasySequenceLabelingBox {
                                  </span>`
             }
         }
-        bodyHtmlStr = `<div class="easy_sequence_labeling_box_body">${bodyHtmlStr}</div>`
-        const renderHtml = `<div class="easy_sequence_labeling_box">${headHtmlStr}${bodyHtmlStr}</div>`
+        bodyHtmlStr = `<div class="easy_text_annotation_box_body">${bodyHtmlStr}</div>`
+        const renderHtml = `<div class="easy_text_annotation_box">${headHtmlStr}${bodyHtmlStr}</div>`
         return renderHtml
     }
     #renderHtml = html => {
@@ -217,5 +217,5 @@ class EasySequenceLabelingBox {
         return this.#annotations
     }
 }
-window.EasySequenceLabelingBox = EasySequenceLabelingBox
-export default EasySequenceLabelingBox
+window.EasyTextAnnotationBox = EasyTextAnnotationBox
+export default EasyTextAnnotationBox

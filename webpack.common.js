@@ -4,7 +4,7 @@ const path = require("path")
 module.exports = {
     entry: "./src/index.js",
     output: {
-        filename: "easySequenceLabelingBox.min.js",
+        filename: "easyTextAnnotationBox.min.js",
         path: path.resolve(__dirname, "dist"),
     },
     module: {
