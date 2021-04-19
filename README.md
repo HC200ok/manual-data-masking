@@ -48,7 +48,6 @@
   <div id="demo"></div>
 </body>
 <script>
-  window.onload = () => {
     const annotations = [
       {
         word: "James",
@@ -93,7 +92,6 @@
     // }).catch(function (error) {
     //     XXXXX
     // })
-  };
 </script>
 ```
 
