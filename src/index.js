@@ -1,8 +1,4 @@
 import './style.scss'
-const defaultOptions = {
-    annotations: [],
-    color: "#577eba"
-}
 class EasyTextAnnotationBox {
     #box
     #text
@@ -10,8 +6,12 @@ class EasyTextAnnotationBox {
     #labels
     #annotations
     #selectingWord
+    #defaultOptions = {
+        annotations: [],
+        color: "#577eba"
+    }
     constructor(options) {
-        options = Object.assign({}, defaultOptions, options)
+        options = Object.assign({}, this.#defaultOptions, options)
         const { container, text, annotations, labels, color } = options
         if (typeof text !== "string" && text.length === 0) {
             throw new Error("Type or value of the text option is wrong");
