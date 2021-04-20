@@ -13,6 +13,15 @@ class EasyTextAnnotationBox {
     constructor(options) {
         options = Object.assign({}, defaultOptions, options)
         const { container, text, annotations, labels, color } = options
+        if (typeof text !== "string" && text.length === 0) {
+            throw new Error("Type or value of the text option is wrong");
+        }
+        if (!(labels instanceof Array) && labels.length === 0) {
+            throw new Error("Type or value of the labels option is wrong");
+        }
+        if (typeof container !== "object") {
+            throw new Error("Type of the container option is wrong");
+        }
         this.#box = container
         this.#text = text
         this.#labels = labels
@@ -114,11 +123,11 @@ class EasyTextAnnotationBox {
             hexcolor = hexcolor.slice(1)
         }
         // Convert to RGB value
-        var r = parseInt(hexcolor.substr(0, 2), 16)
-        var g = parseInt(hexcolor.substr(2, 2), 16)
-        var b = parseInt(hexcolor.substr(4, 2), 16)
+        const r = parseInt(hexcolor.substr(0, 2), 16)
+        const g = parseInt(hexcolor.substr(2, 2), 16)
+        const b = parseInt(hexcolor.substr(4, 2), 16)
         // Get YIQ ratio
-        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000
+        const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000
         // Check contrast
         return (yiq >= 128) ? 'black' : 'white'
     }
