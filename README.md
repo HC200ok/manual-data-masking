@@ -95,7 +95,7 @@
 </script>
 ```
 
-### Options
+### Props
 
 | Props       | Description              | Type   | Must Required | Default   |
 | ----------- | ------------------------ | ------ | ------------- | --------- |
