@@ -4,9 +4,9 @@
 
 ### Features
 
-1. Configurable categories of confidential data like swear word, person name, home address...
-2. Showing confidential data been masked when mouse hover.
-3. Replacing confidential data by using characters "●" and "x".
+1. Configurable categories of sensitive data like swear word, person name, home address...
+2. Showing sensitive data been masked when mouse hover.
+3. Replacing sensitive data by using characters "●" and "x".
 
 ### Concept
 
