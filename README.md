@@ -2,13 +2,13 @@
 
 > A javascript plugin for mannual [data masking](https://research.aimultiple.com/data-masking/).
 
-# Features
+## Features
 
 1. Configurable categories of sensitive data like swear word, person name, home address...
 2. Showing sensitive data been masked when mouse hover.
 3. Replacing sensitive data by using characters "●" and "x".
 
-# Concept
+## Concept
 
 ```javascript
 // dataMasked before data masking:
