@@ -1,121 +1,161 @@
 import './style.scss'
-class EasyTextAnnotationBox {
-    #box
+class EasyDataMasking {
     #text
-    #color
-    #labels
-    #annotations
-    #selectingWord
+    #chunks
+    #container
+    #categories
+    #dataMasked
+    #selectingData
+    #selectingDataStartIndex
+    #events = {}
     #defaultOptions = {
-        annotations: [],
-        color: "#577eba"
+        maskings: []
     }
     constructor(options) {
         options = Object.assign({}, this.#defaultOptions, options)
-        const { container, text, annotations, labels, color } = options
+        const { container, text, maskings, categories, color } = options
         if (typeof text !== "string" && text.length === 0) {
             throw new Error("Type or value of the text option is wrong");
         }
-        if (!(labels instanceof Array) && labels.length === 0) {
-            throw new Error("Type or value of the labels option is wrong");
+        if (!(categories instanceof Array) && categories.length === 0) {
+            throw new Error("Type or value of the categories option is wrong");
+        }
+        if (!(maskings instanceof Array) && maskings.length === 0) {
+            throw new Error("Type or value of the maskings option is wrong");
         }
         if (typeof container !== "object") {
             throw new Error("Type of the container option is wrong");
         }
-        this.#box = container
+        this.#container = container
         this.#text = text
-        this.#labels = labels
-        this.#annotations = annotations
-        this.#selectingWord = null
-        this.#color = color
-        this.#renderAnnotationHtml(this.#annotations, this.#labels, this.#text)
+        this.#categories = categories
+        this.#dataMasked = maskings
+        this.#selectingData = null
+        this.#checkCategoriesColor(this.#categories)
+        this.#renderMaskingHtml(this.#dataMasked, this.#categories, this.#text)
         this.#bindEvents()
     }
-    #getEntityInfos = (text, annotation) => {
-        const regex = new RegExp(annotation.word, 'g');
-        const matchedIndexes = [...text.matchAll(regex)]
-        let entityInfos = []
-        for (const item of matchedIndexes) {
-            entityInfos.push({
-                end_offset: item["index"] + annotation.word.length,
-                label: annotation.label,
-                start_offset: item["index"],
-                word: annotation.word
-            })
-        }
-        return entityInfos
+    #checkCategoriesColor = (categories) => {
+        categories.forEach(category => {
+            if (!category.color) category.color = "#577eba"
+        })
     }
-    #initEntities = (text, annotations) => {
+    #generateEntities = maskings => {
+        // sort by masking_start
+        maskings = maskings.slice().sort((a, b) => a.masking_start - b.masking_start)
+        this.#dataMasked = maskings
         let entitiesInfos = []
-        for (const annotation of annotations) {
-            const entityInfos = this.#getEntityInfos(text, annotation)
+        for (const masking of maskings) {
+            const entityInfos = {
+                ...masking,
+                color: this.#getCategoryColor(masking.masking_category)
+            }
             entitiesInfos = entitiesInfos.concat(entityInfos)
         }
-        // sort by start_offset
-        entitiesInfos = entitiesInfos.slice().sort((a, b) => a.start_offset - b.start_offset)
-        // filter duplicate start_offset
-        entitiesInfos = entitiesInfos.reduce((acc, current) => {
-          const i = acc.findIndex(item => item.start_offset === current.start_offset);
-          if (i == -1) {
-            return acc.concat([current])
-          } else {
-            if (acc[i].word.length < current.word.length) acc[i] = current
-            return acc
-          }
-        }, [])
-
         return entitiesInfos
     }
-    #makeTextChunks = text => {
+    #generateTextChunks = text => {
         let chunks = []
         const snippets = text.split('\n')
         for (const snippet of snippets.slice(0, -1)) {
             chunks.push({
                 type: "text",
-                content: snippet + '\n',
-                label: null,
-                color: null,
-                newline: false
+                content: snippet,
+                category: null,
+                color: null
             })
             chunks.push({
-                type: "text",
-                content: '',
-                label: null,
-                color: null,
-                newline: true
+                type: "wrap",
+                content: '↵',
+                category: null,
+                color: null
             })
         }
         chunks.push({
             type: "text",
-            label: null,
+            category: null,
             color: null,
-            content: snippets.slice(-1)[0],
-            newline: false
+            content: snippets.slice(-1)[0]
         })
         return chunks
     }
-    #makeChunks = (text, entities) => {
+    #generateChunks = (text, entities) => {
         let chunks = []
         let startOffset = 0
         // to count the number of characters correctly.
         const characters = text.split('')
         for (const entity of entities) {
             // add non-entities to chunks.
-            let piece = characters.slice(startOffset, entity.start_offset).join('')
-            chunks = chunks.concat(this.#makeTextChunks(piece))
-            startOffset = entity.end_offset
+            let piece = characters.slice(startOffset, entity.masking_start).join('')
+            chunks = chunks.concat(this.#generateTextChunks(piece))
+            startOffset = entity.masking_end
 
             // add entities to chunks.
-            piece = characters.slice(entity.start_offset, entity.end_offset).join('')
+            piece = characters.slice(entity.masking_start, entity.masking_end).join('')
             chunks.push({
-                type: "annotation",
+                type: "masking",
                 content: piece,
-                label: entity.label
+                start: entity.masking_start,
+                category: entity.masking_category,
+                color: entity.color
             })
         }
         // add the rest of text.
-        chunks = chunks.concat(this.#makeTextChunks(characters.slice(startOffset, characters.length).join('')))
+        chunks = chunks.concat(this.#generateTextChunks(characters.slice(startOffset, characters.length).join('')))
         return chunks
+    }
+    #generateRenderHtml = (chunks, categories) => {
+        let headHtmlStr = ""
+        for (const category of categories) {
+            let categoryHtmlStr = ""
+            categoryHtmlStr += `<span class="category_value" style="background-color: ${category.color}; color: ${this.#getContrastColor(category.color)}">${category.value}</span>`
+            if (category.keypress) {
+                categoryHtmlStr += `<span class="category_keypress" style="border-color: ${category.color}">${category.keypress}</span>`
+            }
+            headHtmlStr += `<span data-category="${category.value}" class="category" style="border-color: ${category.color}">${categoryHtmlStr}</span>`
+        }
+        headHtmlStr = `<div class="easy_data_masking_head">${headHtmlStr}</div>`
+        let bodyHtmlStr = ""
+        for (const chunk of chunks) {
+            if (chunk.type == "text") {
+                bodyHtmlStr += `<span>${chunk.content}</span>`
+            }
+            if (chunk.type == "wrap") {
+                bodyHtmlStr += `<br/>`
+            }
+            if (chunk.type == "masking") {
+                bodyHtmlStr += `<span class="masking" style="border-color: ${chunk.color};">
+                                    <button class="masking_delete" data-maskingStart="${chunk.start}">x
+                                    </button>                    
+                                    <span class="masking_content">
+                                        <div class="masking_content_top">
+                                            ${"●".repeat(chunk.content.length)}
+                                        </div>
+                                        <div class="masking_content_bottom">
+                                            ${chunk.content}
+                                        </div>
+                                    </span>
+                                    <span class="masking_category"
+                                        style="background-color: ${chunk.color}; color: ${this.#getContrastColor(chunk.color)};">
+                                        ${chunk.category}
+                                    </span>
+                                 </span>`
+            }
+        }
+        bodyHtmlStr = `<div class="easy_data_masking_body" id="easy_data_masking_body">${bodyHtmlStr}</div>`
+        const renderHtml = `<div class="easy_data_masking">${headHtmlStr}${bodyHtmlStr}</div>`
+        return renderHtml
+    }
+    #renderHtml = html => {
+        this.#container.innerHTML = html
+    }
+    #renderMaskingHtml = (maskings, lables, text) => {
+        const entities = this.#generateEntities(maskings)
+        this.#chunks = this.#generateChunks(text, entities)
+        const html = this.#generateRenderHtml(this.#chunks, lables)
+        this.#renderHtml(html)
+        const callbackFunc = this.#events["afterMasking"]
+        if (typeof callbackFunc === "function") callbackFunc()
     }
     #getContrastColor = hexcolor => {
         // If a leading # is provided, remove it
@@ -131,100 +171,85 @@ class EasyTextAnnotationBox {
         // Check contrast
         return (yiq >= 128) ? 'black' : 'white'
     }
-    #makeRenderHtml = (chunks, labels) => {
-        let headHtmlStr = ""
-        for (const label of labels) {
-            let labelHtmlStr = ""
-            labelHtmlStr += `<span class="label_value" style="background-color: ${this.#color}; color: ${this.#getContrastColor(this.#color)}">${label.value}</span>`
-            if (label.keypress) {
-                labelHtmlStr += `<span class="label_keypress" style="border-color: ${this.#color}">${label.keypress}</span>`
-            }
-            headHtmlStr += `<span data-label="${label.value}" class="label" style="border-color: ${this.#color}">${labelHtmlStr}</span>`
-        }
-        headHtmlStr = `<div class="easy_text_annotation_box_head">${headHtmlStr}</div>`
-        let bodyHtmlStr = ""
-        for (const chunk of chunks) {
-            if (chunk.type == "text") {
-                bodyHtmlStr += `<span>${chunk.content}</span>`
-            }
-            if (chunk.type == "annotation") {
-                bodyHtmlStr += `<span class="annotation" style="border-color: ${this.#color};">
-                                    <span class="annotation_word">
-                                        ${chunk.content}
-                                        <button class="annotation_delete" data-word="${chunk.content.trim()}">x
-                                        </button>
-                                    </span>
-                                    <span class="annotation_label"
-                                        style="background-color: ${this.#color}; color: ${this.#getContrastColor(this.#color)};">
-                                        ${chunk.label}
-                                    </span>
-                                 </span>`
-            }
-        }
-        bodyHtmlStr = `<div class="easy_text_annotation_box_body">${bodyHtmlStr}</div>`
-        const renderHtml = `<div class="easy_text_annotation_box">${headHtmlStr}${bodyHtmlStr}</div>`
-        return renderHtml
+    #getCategoryColor = category => {
+        return this.#categories.find(item => item.value === category).color
     }
-    #renderHtml = html => {
-        this.#box.innerHTML = html
-    }
-    #renderAnnotationHtml = (annotations, lables, text) => {
-        const entities = this.#initEntities(text, annotations)
-        const chunks = this.#makeChunks(text, entities)
-        const html = this.#makeRenderHtml(chunks, lables)
-
-        this.#renderHtml(html)
+    #getPrevNodesLength = content => {
+        const nodeIndex = this.#chunks.findIndex(item => item.content === content)
+        let prevNodesLength = 0
+        for (let i = 0; i < nodeIndex; i++) {
+            prevNodesLength += this.#chunks[i].content.length
+        }
+        return prevNodesLength
     }
     #bindEvents = () => {
-        this.#box.addEventListener("click", e => {
+        this.#container.addEventListener("click", e => {
             e = e || window.event;
             const target = e.target || e.srcElement;
-            if (target.classList.contains("annotation_delete")) {
-                const word = target.getAttribute("data-word")
-                this.#annotations = this.#annotations.filter(item => item.word != word)
-                this.#renderAnnotationHtml(this.#annotations, this.#labels, this.#text)
+            if (target.classList.contains("masking_delete")) {
+                const masking_start = target.getAttribute("data-maskingStart")
+                this.#dataMasked = this.#dataMasked.filter(item => item.masking_start != masking_start)
+                this.#renderMaskingHtml(this.#dataMasked, this.#categories, this.#text)
             }
         })
 
-        this.#box.addEventListener("mousedown", e => {
+        this.#container.addEventListener("mousedown", e => {
             e = e || window.event;
             const target = e.target || e.srcElement;
-            if (target.parentNode && target.parentNode.classList.contains("label")) {
-                const label = target.parentNode.getAttribute("data-label")
-                if (this.#selectingWord && this.#selectingWord != "" && label) {
-                    this.#annotations.push({
-                        "word": this.#selectingWord,
-                        "label": label
+            if (target.parentNode && target.parentNode.classList.contains("category")) {
+                const category = target.parentNode.getAttribute("data-category")
+                if (this.#selectingData && this.#selectingData != "" && category) {
+                    this.#dataMasked.push({
+                        "masking_string": this.#selectingData,
+                        "masking_category": category,
+                        "masking_start": this.#selectingDataStartIndex,
+                        "masking_end": this.#selectingDataStartIndex + this.#selectingData.length
                     })
-                    this.#renderAnnotationHtml(this.#annotations, this.#labels, this.#text)
+                    this.#renderMaskingHtml(this.#dataMasked, this.#categories, this.#text)
                 }
             }
         })
 
         // event of add annocation
         document.addEventListener("mouseup", () => {
-            let word = window.getSelection ? window.getSelection()
+            let masking_string = window.getSelection ? window.getSelection()
                 : document.selection.createRange().text;
-            word = word + "";
-            word = word.replace(/^\s+|\s+$/g, "");
-            this.#selectingWord = word.trim().length ? word : null
+            const anchorOffset = masking_string.anchorOffset
+            const focusOffset = masking_string.focusOffset
+            const anchorNodeData = masking_string.anchorNode.data
+            masking_string = masking_string + "";
+            masking_string = masking_string.replace(/^\s+|\s+$/g, "");
+            this.#selectingData = masking_string.trim().length ? masking_string : null
+            this.#selectingDataStartIndex = this.#getPrevNodesLength(anchorNodeData) + Math.min(anchorOffset, focusOffset)
         })
 
         document.addEventListener('keyup', e => {
             const keyName = e.key;
-            const label = this.#labels.find(label => label.keypress === keyName)
-            if (this.#selectingWord && this.#selectingWord != "" && label) {
-                this.#annotations.push({
-                    "word": this.#selectingWord,
-                    "label": label.value
+            const category = this.#categories.find(category => category.keypress === keyName)
+            if (this.#selectingData && this.#selectingData != "" && category) {
+                this.#dataMasked.push({
+                    "masking_string": this.#selectingData,
+                    "masking_category": category.value,
+                    "masking_start": this.#selectingDataStartIndex,
+                    "masking_end": this.#selectingDataStartIndex + this.#selectingData.length
                 })
-                this.#renderAnnotationHtml(this.#annotations, this.#labels, this.#text)
+                this.#renderMaskingHtml(this.#dataMasked, this.#categories, this.#text)
             }
         }, false);
     }
-    getAnnotations() {
-        return this.#annotations
+    getDataMasked = () => {
+        return this.#dataMasked
+    }
+    getTextAfterMasking = () => {
+        let afterMasking = this.#text
+        this.#dataMasked.forEach(masking => {
+            afterMasking = afterMasking.replace(masking.masking_string, "x".repeat(masking.masking_string.length))
+        })
+        return afterMasking
+    }
+    on = (event, callback) => {
+        this.#events[event] = callback
     }
 }
-window.EasyTextAnnotationBox = EasyTextAnnotationBox
-export default EasyTextAnnotationBox
+window.EasyDataMasking = EasyDataMasking
+export default EasyDataMasking

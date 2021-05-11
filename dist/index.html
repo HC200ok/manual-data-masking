@@ -3,63 +3,57 @@
     <meta charset="utf-8">
     <title>Development demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="easyTextAnnotationBox.min.js"></script>
 </head>
 <body>
     <div id="demo"></div>
-    <button id="button">getLatestAnnotaions</button>
-    <div id="annotaions"></div>
+    <div style="margin-top: 20px;">dataMasked:</div>
+    <div id="dataMasked"></div><br/>
+    <div style="margin-top: 20px;">textAfterMasking:</div>
+    <div id="textAfterMasking"></div>
+    <script src="easyDataMasking.min.js"></script>
 </body>
 <script>
-    window.onload = () => {
-        const annotations = [
+        const dataMasked = [
             {
-                "word": "James",
-                "label": "name",
-            },
-            // {
-            //     "word": "basketball",
-            //     "label": "sports"
-            // },
-            // {
-            //     "word": "hamburger",
-            //     "label": "food"
-            // }
-        ]
-        const labels = [
-            {
-                "value": "name",
-                "keypress": "n"
-            },
-            {
-                "value": "sports",
-                "keypress": "s"
-            },
-            {
-                "value": "emoji",
-                "keypress": "e"
-            },
-            {
-                "value": "food"
-            },
+                "masking_string": "川崎",
+                "masking_category": "Person Name",
+                "masking_start": 0,
+                "masking_end": 2
+            }
         ]
 
-        const text = "James is a basketball player, he likes eating hamburger since he was a child, now he is a basketball 🏀  star."
+        const categories = [
+            {
+                "value": "Person Name",
+                "color": "#b6656c"
+            },
+            {
+                "value": "Swear Word",
+                "color": "#577eba"
+            },
+            {
+                "value": "Phone Number",
+                "color": "#3e6146"
+            }
+        ]
+
+        const text = "川崎さんは川崎に住んでいます、電話番号は080080080、自粛しない悪い人間。"
         
-        const color = "#577eba"
-
-        const easyTextAnnotationBox = new EasyTextAnnotationBox({
+        const easyDataMasking = new EasyDataMasking({
             container: document.getElementById("demo"),
             text,
-            annotations,
-            labels,
-            // color
+            dataMasked,
+            categories,
         })
 
-        document.getElementById("button").addEventListener('click', () => {
-            document.getElementById('annotaions').innerText = JSON.stringify(easyTextAnnotationBox.getAnnotations())
+        easyDataMasking.on("afterMasking", function() {
+            document.getElementById('textAfterMasking').innerText = easyDataMasking.getTextAfterMasking()
+            document.getElementById('dataMasked').innerText = JSON.stringify(easyDataMasking.getDataMasked())
         })
-    }
+
+        document.getElementById('textAfterMasking').innerText = easyDataMasking.getTextAfterMasking()
+        document.getElementById('dataMasked').innerText = JSON.stringify(easyDataMasking.getDataMasked())
+
 </script>
 
 </html>

@@ -1,114 +1,129 @@
-# easy-text-annotation-box
+# easy-data-masking
 
-> It's an easy javascript plugin for mannual text annotation, supporting key shortcuts for faster labeling.
+> A javascript plugin for mannual [data masking](https://research.aimultiple.com/data-masking/).
+
+### Features
+
+1. Configurable categories of confidential data like swear word, person name, home address...
+2. Showing confidential data been masked when mouse hover.
+3. Replacing confidential data by using characters "●" and "x".
 
 ### Concept
 
 ```javascript
-// initial annotations:
+// dataMasked before data masking:
 [
   {
-    word: "James",
-    label: "name",
+    masking_string: "川崎",
+    masking_category: "Person Name",
+    masking_start: 0,
+    masking_end: 2,
   },
 ];
+
+// text before data masking:
+"川崎さんは川崎に住んでいます、電話番080080080、自粛しない悪い人間。";
 ```
 
 <img src="down-arrow.png" width="50px"/><br/>
-<img src="demo.gif" width="650px"/><br/>
+<img src="demo.gif" width="750px"/><br/>
 <img src="down-arrow.png" width="50px"/><br/>
 
 ```javascript
-// latest annotations:
+// dataMasked after data masking:
 [
   {
-    word: "James",
-    label: "name",
+    masking_string: "川崎",
+    masking_category: "Person Name",
+    masking_start: 0,
+    masking_end: 2,
   },
   {
-    word: "basketball",
-    label: "sports",
+    masking_string: "080080080",
+    masking_category: "Phone Number",
+    masking_start: 20,
+    masking_end: 29,
   },
   {
-    word: "🏀 ",
-    label: "emoji",
+    masking_string: "悪い",
+    masking_category: "Swear Word",
+    masking_start: 35,
+    masking_end: 37,
   },
 ];
-```
 
+// text after data masking:
+"xxさんは川崎に住んでいます、電話番号はxxxxxxxxx、自粛しないxx人間。";
+```
 ### Demo
 
 [Try!](https://codesandbox.io/s/easy-sequence-labeling-box-igykl?file=/index.html)
 
-### How to use:
+### How to use
+
+##### step1: download [easyDataMasking.min.js](https://codesandbox.io/s/easy-sequence-labeling-box-igykl?file=/index.html)
+
+##### step2:
 
 ```html
-<script src="https://raw.githack.com/HC200ok/easy-text-annotation-box/master/dist/easyTextAnnotationBox.min.js"></script>
-<body>
-  <div id="demo"></div>
-</body>
+<script src="easyDataMasking.min.js"></script>
 <script>
-    const annotations = [
-      {
-        word: "James",
-        label: "name",
-      },
-    ];
-    const labels = [
-      {
-        value: "name",
-        keypress: "n",
-      },
-      {
-        value: "sports",
-        keypress: "s",
-      },
-      {
-        value: "emoji",
-        keypress: "e",
-      },
-      {
-        value: "food",
-      },
-    ];
+  const dataMasked = [
+    {
+      "masking_string": "川崎",
+      "masking_category": "Person Name",
+      "masking_start": 0,
+      "masking_end": 2
+    }
+  ]
 
-    const text =
-      "James is a basketball player, he likes eating hamburger since he was a child, now he is a basketball 🏀  star.";
+  const categories = [
+    {
+      "value": "Person Name",
+      "color": "#b6656c"
+    },
+    {
+      "value": "Swear Word",
+      "color": "#577eba"
+    },
+    {
+      "value": "Others",
+      "color": "#3e6146"
+    }
+  ]
 
-    const color = "#577eba";
+  const text = "川崎さんは川崎に住んでいます、電話番080080080、自粛しない悪い人間。"
 
-    const easyTextAnnotationBox = new EasyTextAnnotationBox({
-      container: document.getElementById("demo"),
-      text,
-      annotations, // optional
-      labels,
-      color, // optional
-    });
+  const easyDataMasking = new EasyDataMasking({
+    container: document.getElementById("demo"),
+    text,
+    dataMasked,
+    categories,
+  })
 
-    // axios.post('/XXXX', {
-    //     parameters: easyTextAnnotationBox.getAnnotations(),
-    // }).then(function (response) {
-    //     XXXXX
-    // }).catch(function (error) {
-    //     XXXXX
-    // })
+  easyDataMasking.on("afterMasking", function() {
+    document.getElementById('textAfterMasking')innerText = easyDataMasking.getTextAfterMasking()
+    document.getElementById('dataMasked').innerText =JSON.stringify(easyDataMasking.getDataMasked())
+  })
 </script>
 ```
 
 ### Options
 
-| Props       | Description              | Type   | Must Required | Default   |
-| ----------- | ------------------------ | ------ | ------------- | --------- |
-| annotations | labeled data             | Array  | no            | []        |
-| labels      | label value and keypress | Array  | yes           |           |
-| text        | text                     | String | yes           |           |
-| color       | theme color              | String | no            | '#577eba' |
+| Property   | Description                  | Type               | Required | Default |
+| ---------- | ---------------------------- | ------------------ | -------- | ------- |
+| container  | container dom element        | Dom Element Object | yes      |         |
+| categories | categories of sensitive data | Array              | yes      |         |
+| text       | text                         | String             | yes      |         |
+| dataMasked | data have been masked        | Array              | no       | []      |
 
 ### Functions
 
-| Function Name  | Description                |
-| :------------: | -------------------------- |
-| getAnnotations | get the latest annotations |
+|    Function Name    | Description                                                                             |
+| :-----------------: | --------------------------------------------------------------------------------------- |
+|    getDataMasked    | get data been masked                                                                    |
+| getTextAfterMasking | get text after data masking                                                             |
+|         on          | register callback functions that will be triggered each time after new data been masked |
 
 ### Build Setup
 
