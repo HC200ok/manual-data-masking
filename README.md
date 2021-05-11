@@ -2,13 +2,13 @@
 
 > A javascript plugin for mannual [data masking](https://research.aimultiple.com/data-masking/).
 
-### Features
+# Features
 
 1. Configurable categories of sensitive data like swear word, person name, home address...
 2. Showing sensitive data been masked when mouse hover.
 3. Replacing sensitive data by using characters "●" and "x".
 
-### Concept
+# Concept
 
 ```javascript
 // dataMasked before data masking:
@@ -55,11 +55,11 @@
 // text after data masking:
 "xxさんは川崎に住んでいます、電話番号はxxxxxxxxx、自粛しないxx人間。";
 ```
-### Demo
+## Demo
 
 [Try!](https://codesandbox.io/s/easy-data-masking-igykl?file=/index.html)
 
-### How to use
+## How to use
 
 step1: download [easyDataMasking.min.js](https://github.com/HC200ok/easy-data-masking/blob/master/dist/easyDataMasking.min.js)
 
@@ -108,7 +108,7 @@ step2:
 </script>
 ```
 
-### Props
+## Props
 
 | Property   | Description                  | Type               | Required | Default |
 | ---------- | ---------------------------- | ------------------ | -------- | ------- |
@@ -117,7 +117,7 @@ step2:
 | text       | text                         | String             | yes      |         |
 | dataMasked | sensitive data have been masked        | Array              | no       | []      |
 
-### Functions
+## Functions
 
 |    Function Name    | Description                                                                             |
 | :-----------------: | --------------------------------------------------------------------------------------- |
@@ -125,7 +125,7 @@ step2:
 | getTextAfterMasking | get text after data masking                                                             |
 |         on          | register callback functions that will be triggered each time after new sensitive data been masked |
 
-### Build Setup
+## Build Setup
 
 ```bash
 # install dependencies
