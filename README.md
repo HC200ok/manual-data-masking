@@ -2,13 +2,13 @@
 
 > A javascript plugin for mannual [data masking](https://research.aimultiple.com/data-masking/).
 
-### Features
+## Features
 
-1. Configurable categories of confidential data like swear word, person name, home address...
-2. Showing confidential data been masked when mouse hover.
-3. Replacing confidential data by using characters "●" and "x".
+1. Configurable categories of sensitive data like swear word, person name, home address...
+2. Showing sensitive data been masked when mouse hover.
+3. Replacing sensitive data by using characters "●" and "x".
 
-### Concept
+## Concept
 
 ```javascript
 // dataMasked before data masking:
@@ -22,7 +22,7 @@
 ];
 
 // text before data masking:
-"川崎さんは川崎に住んでいます、電話番080080080、自粛しない悪い人間。";
+"川崎さんは川崎に住んでいます、電話番号は080080080、自粛しない悪い人間。";
 ```
 
 <img src="down-arrow.png" width="50px"/><br/>
@@ -55,18 +55,21 @@
 // text after data masking:
 "xxさんは川崎に住んでいます、電話番号はxxxxxxxxx、自粛しないxx人間。";
 ```
-### Demo
+## Demo
 
-[Try!](https://codesandbox.io/s/easy-sequence-labeling-box-igykl?file=/index.html)
+[Try!](https://codesandbox.io/s/easy-data-masking-igykl?file=/index.html)
 
-### How to use
+## How to use
 
-##### step1: download [easyDataMasking.min.js](https://codesandbox.io/s/easy-sequence-labeling-box-igykl?file=/index.html)
+step1: download [easyDataMasking.min.js](https://github.com/HC200ok/easy-data-masking/blob/master/dist/easyDataMasking.min.js)
 
-##### step2:
+step2:
 
 ```html
 <script src="easyDataMasking.min.js"></script>
+
+<div id="demo"></div>
+
 <script>
   const dataMasked = [
     {
@@ -102,30 +105,30 @@
   })
 
   easyDataMasking.on("afterMasking", function() {
-    document.getElementById('textAfterMasking')innerText = easyDataMasking.getTextAfterMasking()
-    document.getElementById('dataMasked').innerText =JSON.stringify(easyDataMasking.getDataMasked())
+    console.log(easyDataMasking.getTextAfterMasking())
+    console.log(easyDataMasking.getDataMasked())
   })
 </script>
 ```
 
-### Props
+## Options
 
 | Property   | Description                  | Type               | Required | Default |
 | ---------- | ---------------------------- | ------------------ | -------- | ------- |
 | container  | container dom element        | Dom Element Object | yes      |         |
 | categories | categories of sensitive data | Array              | yes      |         |
 | text       | text                         | String             | yes      |         |
-| dataMasked | data have been masked        | Array              | no       | []      |
+| dataMasked | sensitive data have been masked        | Array              | no       | []      |
 
-### Functions
+## Functions
 
 |    Function Name    | Description                                                                             |
 | :-----------------: | --------------------------------------------------------------------------------------- |
-|    getDataMasked    | get data been masked                                                                    |
+|    getDataMasked    | get sensitive data been masked                                                                    |
 | getTextAfterMasking | get text after data masking                                                             |
-|         on          | register callback functions that will be triggered each time after new data been masked |
+|         on          | register callback functions that will be triggered each time after new sensitive data been masked |
 
-### Build Setup
+## Build Setup
 
 ```bash
 # install dependencies
