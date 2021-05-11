@@ -22,7 +22,7 @@
 ];
 
 // text before data masking:
-"川崎さんは川崎に住んでいます、電話番080080080、自粛しない悪い人間。";
+"川崎さんは川崎に住んでいます、電話番号は080080080、自粛しない悪い人間。";
 ```
 
 <img src="down-arrow.png" width="50px"/><br/>
@@ -61,9 +61,9 @@
 
 ### How to use
 
-##### step1: download [easyDataMasking.min.js](https://codesandbox.io/s/easy-sequence-labeling-box-igykl?file=/index.html)
+step1: download [easyDataMasking.min.js](https://github.com/HC200ok/easy-data-masking/blob/master/dist/easyDataMasking.min.js)
 
-##### step2:
+step2:
 
 ```html
 <script src="easyDataMasking.min.js"></script>
