@@ -108,7 +108,7 @@ step2:
 </script>
 ```
 
-## Props
+## Options
 
 | Property   | Description                  | Type               | Required | Default |
 | ---------- | ---------------------------- | ------------------ | -------- | ------- |
