@@ -9,7 +9,7 @@ class EasyDataMasking {
     #selectingDataStartIndex
     #events = {}
     #defaultOptions = {
-        maskings: []
+        dataMasked: []
     }
     constructor(options) {
         options = Object.assign({}, this.#defaultOptions, options)
@@ -20,8 +20,8 @@ class EasyDataMasking {
         if (!(categories instanceof Array) && categories.length === 0) {
             throw new Error("Type or value of the categories option is wrong");
         }
-        if (!(maskings instanceof Array) && maskings.length === 0) {
-            throw new Error("Type or value of the maskings option is wrong");
+        if (!(dataMasked instanceof Array) && dataMasked.length === 0) {
+            throw new Error("Type or value of the dataMasked option is wrong");
         }
         if (typeof container !== "object") {
             throw new Error("Type of the container option is wrong");
@@ -29,7 +29,7 @@ class EasyDataMasking {
         this.#container = container
         this.#text = text
         this.#categories = categories
-        this.#dataMasked = maskings
+        this.#dataMasked = dataMasked
         this.#selectingData = null
         this.#checkCategoriesColor(this.#categories)
         this.#renderMaskingHtml(this.#dataMasked, this.#categories, this.#text)
