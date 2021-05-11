@@ -67,6 +67,9 @@ step2:
 
 ```html
 <script src="easyDataMasking.min.js"></script>
+
+<div id="demo"></div>
+
 <script>
   const dataMasked = [
     {
@@ -102,8 +105,8 @@ step2:
   })
 
   easyDataMasking.on("afterMasking", function() {
-    document.getElementById('textAfterMasking')innerText = easyDataMasking.getTextAfterMasking()
-    document.getElementById('dataMasked').innerText =JSON.stringify(easyDataMasking.getDataMasked())
+    console.log(easyDataMasking.getTextAfterMasking())
+    console.log(easyDataMasking.getDataMasked())
   })
 </script>
 ```
