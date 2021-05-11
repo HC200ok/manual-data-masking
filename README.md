@@ -57,7 +57,7 @@
 ```
 ### Demo
 
-[Try!](https://codesandbox.io/s/easy-sequence-labeling-box-igykl?file=/index.html)
+[Try!](https://codesandbox.io/s/easy-data-masking-igykl?file=/index.html)
 
 ### How to use
 
