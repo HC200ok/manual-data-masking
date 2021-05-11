@@ -121,7 +121,7 @@ step2:
 
 |    Function Name    | Description                                                                             |
 | :-----------------: | --------------------------------------------------------------------------------------- |
-|    getDataMasked    | get data been masked                                                                    |
+|    getDataMasked    | get sensitive data been masked                                                                    |
 | getTextAfterMasking | get text after data masking                                                             |
 |         on          | register callback functions that will be triggered each time after new sensitive data been masked |
 
