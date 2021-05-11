@@ -115,7 +115,7 @@ step2:
 | container  | container dom element        | Dom Element Object | yes      |         |
 | categories | categories of sensitive data | Array              | yes      |         |
 | text       | text                         | String             | yes      |         |
-| dataMasked | data have been masked        | Array              | no       | []      |
+| dataMasked | sensitive data have been masked        | Array              | no       | []      |
 
 ### Functions
 
@@ -123,7 +123,7 @@ step2:
 | :-----------------: | --------------------------------------------------------------------------------------- |
 |    getDataMasked    | get data been masked                                                                    |
 | getTextAfterMasking | get text after data masking                                                             |
-|         on          | register callback functions that will be triggered each time after new data been masked |
+|         on          | register callback functions that will be triggered each time after new sensitive data been masked |
 
 ### Build Setup
 
