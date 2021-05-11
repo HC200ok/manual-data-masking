@@ -108,7 +108,7 @@
 </script>
 ```
 
-### Options
+### Props
 
 | Property   | Description                  | Type               | Required | Default |
 | ---------- | ---------------------------- | ------------------ | -------- | ------- |
