@@ -1,6 +1,6 @@
 # easy-data-masking
 
-> A javascript plugin for mannual [data masking](https://research.aimultiple.com/data-masking/).
+> A javascript plugin for manual [data masking](https://research.aimultiple.com/data-masking/).
 
 ## Features
 
