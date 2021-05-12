@@ -243,7 +243,7 @@ class EasyDataMasking {
     getTextAfterMasking = () => {
         let afterMasking = this.#text
         this.#dataMasked.forEach(masking => {
-            afterMasking = afterMasking.replace(masking.masking_string, "x".repeat(masking.masking_string.length))
+            afterMasking = afterMasking.replace(masking.masking_string, "*".repeat(masking.masking_string.length))
         })
         return afterMasking
     }
