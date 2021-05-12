@@ -118,7 +118,7 @@ step2:
 | container  | container dom element        | Dom Element Object | yes      |         |
 | categories | categories of sensitive data | Array              | yes      |         |
 | text       | text                         | String             | yes      |         |
-| dataMasked | sensitive data have been masked        | Array              | no       | []      |
+| dataMasked | sensitive data been masked        | Array              | no       | []      |
 
 ## Functions
 
