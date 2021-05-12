@@ -19,7 +19,7 @@
 ```
 
 <img src="down-arrow.png" width="50px"/><br/>
-<img src="demo.gif" width="750px"/><br/>
+<img src="demo1.gif" width="750px"/><br/>
 <img src="down-arrow.png" width="50px"/><br/>
 
 ```javascript
@@ -46,7 +46,7 @@
 ];
 
 // text after data masking:
-"xxさんは川崎に住んでいます、電話番号はxxxxxxxxx、自粛しないxx人間。";
+"**さんは川崎に住んでいます、電話番号は*********、自粛しない**人間。";
 ```
 ## Demo
 
