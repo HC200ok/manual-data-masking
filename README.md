@@ -12,14 +12,7 @@
 
 ```javascript
 // dataMasked before data masking:
-[
-  {
-    masking_string: "川崎",
-    masking_category: "Person Name",
-    masking_start: 0,
-    masking_end: 2,
-  },
-];
+[];
 
 // text before data masking:
 "川崎さんは川崎に住んでいます、電話番号は080080080、自粛しない悪い人間。";
