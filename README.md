@@ -121,6 +121,10 @@ step2:
 | getTextAfterMasking | get text after data masking                                                             |
 |         on          | register callback functions that will be triggered each time after new sensitive data been masked |
 
+## Events
+|    Event Name    | Description                                                                             |
+|         afterMasking          | registered callback functions will be triggered when new sensitive data been masked |
+
 ## Build Setup
 
 ```bash
