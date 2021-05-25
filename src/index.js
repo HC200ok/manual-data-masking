@@ -237,13 +237,16 @@ class EasyDataMasking {
             }
         }, false);
     }
+    #replaceAt = (text, index, replacement) => {
+        return text.substr(0, index) + replacement + text.substr(index + replacement.length);
+    }
     getDataMasked = () => {
         return this.#dataMasked
     }
     getTextAfterMasking = () => {
         let afterMasking = this.#text
         this.#dataMasked.forEach(masking => {
-            afterMasking = afterMasking.replace(masking.masking_string, "*".repeat(masking.masking_string.length))
+            afterMasking = this.#replaceAt(afterMasking, masking.masking_start, "*".repeat(masking.masking_string.length))
         })
         return afterMasking
     }
