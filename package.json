@@ -1,6 +1,6 @@
 {
   "name": "manual-data-masking",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "private": false,
   "description": "A super light javascript library for manual data masking",
   "main": "dist/manualDataMasking.min.js",

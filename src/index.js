@@ -185,7 +185,7 @@ class ManualDataMasking {
     this.#chunks = this.#generateChunks(text, entities)
     const html = this.#generateRenderHtml(this.#chunks, lables)
     this.#renderHtml(html)
-    const callbackFunc = this.#events["afterMasking"]
+    const callbackFunc = this.#events["afterDataMasking"]
     if (typeof callbackFunc === "function") callbackFunc(this.getDataMasked(), this.getTextAfterDataMasking())
   }
   #getContrastColor = hexcolor => {
