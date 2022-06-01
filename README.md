@@ -185,6 +185,11 @@ $manualDataMasking.on("afterDataMasking", (dataMasked, textAfterDataMasking) => 
 | :----------: | ----------------------------------------------------------------------------------- |
 | afterDataMasking | Registered callback functions will be triggered when new sensitive data been masked. Value of text after masking and data msked can be used inside of the callback function. <br><br> $manualDataMasking.on( "afterdataMasking", (dataMasked, textAfterDataMasking) => {<br> &nbsp;&nbsp;console.log(JSON.stringify(dataMasked));<br> &nbsp;&nbsp;console.log(textAfterDataMasking);<br>});|
 
+
+## Vue2 version
+`manual-data-masking` has another version made with Vue.js 2.x: https://github.com/HC200ok/vue2-text-annotation
+
+
 ## Build Setup
 
 ```bash
