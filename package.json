@@ -1,13 +1,27 @@
 {
-  "name": "easy-data-masking",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "manual-data-masking",
+  "version": "0.0.9",
+  "private": false,
+  "description": "A super light javascript library for manual data masking",
+  "main": "dist/manualDataMasking.min.js",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/HC200ok/manual-data-masking",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack serve --config webpack.dev.js"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:HC200ok/manual-data-masking.git"
+  },
+  "keywords": [
+    "manual-data-masking",
+    "javascript",
+    "data-masking"
+  ],
   "author": "HC200ok",
   "devDependencies": {
     "@babel/core": "^7.13.8",

@@ -4,8 +4,12 @@ const path = require("path")
 module.exports = {
     entry: "./src/index.js",
     output: {
-        filename: "easyDataMasking.min.js",
+        filename: "manualDataMasking.min.js",
         path: path.resolve(__dirname, "dist"),
+        library: {
+            name: 'manualDataMasking',
+            type: 'umd',
+        },
     },
     module: {
         rules: [

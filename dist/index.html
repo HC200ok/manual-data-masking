@@ -1,58 +1,62 @@
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Development demo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>Development demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <div id="demo"></div>
-    <div style="margin-top: 20px;">dataMasked:</div>
-    <div id="dataMasked"></div><br/>
-    <div style="margin-top: 20px;">textAfterMasking:</div>
-    <div id="textAfterMasking"></div>
-    <script src="easyDataMasking.min.js"></script>
+  <div id="demo"></div>
+  <div style="margin-top: 20px;">data masked:</div>
+  <div id="dataMasked"></div><br/>
+  <div style="margin-top: 20px;">text after masking:</div>
+  <div id="textAfterDataMasking"></div>
+  <script src="https://unpkg.com/manual-data-masking"></script>
+  <!-- <script src="manualDataMasking.min.js"></script> -->
 </body>
 <script>
-        const dataMasked = [
-            {
-                "masking_string": "川崎",
-                "masking_category": "Person Name",
-                "masking_start": 0,
-                "masking_end": 2
-            }
-        ]
+  const dataMasked = [
+    {
+      "content": "Damn it",
+      "category": "Person Name",
+      "start": 0,
+      "end": 7
+    }
+  ]
 
-        const categories = [
-            {
-                "value": "Person Name",
-                "color": "#b6656c"
-            },
-            {
-                "value": "Swear Word",
-                "color": "#577eba"
-            },
-            {
-                "value": "Phone Number",
-                "color": "#3e6146"
-            }
-        ]
+  const categories = [
+    {
+      "value": "Person Name",
+      "color": "#b6656c"
+    },
+    {
+      "value": "Swear Word",
+      "color": "#577eba"
+    },
+    {
+      "value": "Phone Number",
+      "color": "#3e6146"
+    }
+  ]
 
-        const text = "川崎さんは川崎に住んでいます、電話番号は080080080、自粛しない悪い人間。"
-        
-        const easyDataMasking = new EasyDataMasking({
-            container: document.getElementById("demo"),
-            text,
-            dataMasked,
-            categories,
-        })
+  const text = "Damn it, The phone i just bought last week has been broken 😠, \n I need refund right now, Call me on this phone number: 080808080."
+  
+  const $manualDataMasking = manualDataMasking.create({
+    container: document.getElementById("demo"),
+    text,
+    dataMasked,
+    categories,
+    replaceCharactor: "*",
+    dataMaskingCharactor: "X",
+    maxHeight: 100
+  })
 
-        easyDataMasking.on("afterMasking", function() {
-            document.getElementById('textAfterMasking').innerText = easyDataMasking.getTextAfterMasking()
-            document.getElementById('dataMasked').innerText = JSON.stringify(easyDataMasking.getDataMasked())
-        })
+  $manualDataMasking.on("afterDataMasking", (dataMasked, textAfterDataMasking) => {
+    document.getElementById('dataMasked').innerText = JSON.stringify(dataMasked);
+    document.getElementById('textAfterDataMasking').innerText = textAfterDataMasking;
+  })
 
-        document.getElementById('textAfterMasking').innerText = easyDataMasking.getTextAfterMasking()
-        document.getElementById('dataMasked').innerText = JSON.stringify(easyDataMasking.getDataMasked())
+  document.getElementById('dataMasked').innerText = JSON.stringify($manualDataMasking.getDataMasked());
+  document.getElementById('textAfterDataMasking').innerText = $manualDataMasking.getTextAfterDataMasking();
 
 </script>
 
