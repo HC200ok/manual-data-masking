@@ -99,7 +99,7 @@ const $manualDataMasking = createManualDataMasking({
   maxHeight: 100
 })
 
-$manualDataMasking.on("afterMasking", (dataMasked, textAfterDataMasking) => {
+$manualDataMasking.on("afterDataMasking", (dataMasked, textAfterDataMasking) => {
   console.log(JSON.stringify(dataMasked));
   console.log(textAfterDataMasking);
 })
@@ -183,7 +183,7 @@ $manualDataMasking.on("afterMasking", (dataMasked, textAfterDataMasking) => {
 
 |  Event Name  | Description                                                                         |
 | :----------: | ----------------------------------------------------------------------------------- |
-| afterMasking | Registered callback functions will be triggered when new sensitive data been masked. Value of text after masking and data msked can be used inside of the callback function. <br><br> $manualDataMasking.on( "afterdataMasking", (dataMasked, textAfterDataMasking) => {<br> &nbsp;&nbsp;console.log(JSON.stringify(dataMasked));<br> &nbsp;&nbsp;console.log(textAfterDataMasking);<br>});|
+| afterDataMasking | Registered callback functions will be triggered when new sensitive data been masked. Value of text after masking and data msked can be used inside of the callback function. <br><br> $manualDataMasking.on( "afterdataMasking", (dataMasked, textAfterDataMasking) => {<br> &nbsp;&nbsp;console.log(JSON.stringify(dataMasked));<br> &nbsp;&nbsp;console.log(textAfterDataMasking);<br>});|
 
 ## Build Setup
 
