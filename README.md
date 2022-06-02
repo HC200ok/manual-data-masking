@@ -4,6 +4,8 @@
 
 A super lightweight javascript library for manual data masking.
 
+<img src="./images/size.png"  />
+
 # Manual data masking ?
 
 Manual data masking is an operation that label and hide sensitive data, create new text that hides (masks) sensitive information.
