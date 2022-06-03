@@ -6,7 +6,7 @@ A super lightweight javascript library for manual data masking.
 
 <img src="./images/size.png"  />
 
-# Manual data masking ?
+## Manual data masking ?
 
 Manual data masking is an operation that label and hide sensitive data, create new text that hides (masks) sensitive information.
 
@@ -55,9 +55,9 @@ Text after data masking:
 *******, The phone i just bought last week has been broken 😠, I need refund
 right now, Call me on this phone number: *********.
 ```
-# How to use in your project
+## How to use in your project
 
-## ES modules
+### ES modules
 
 ```bash
 npm install manual-data-masking
@@ -110,7 +110,7 @@ $manualDataMasking.on("afterDataMasking", (dataMasked, textAfterDataMasking) => 
 
 ```
 
-## Script tag:
+### Script tag:
 
 ```html
 <script src="https://unpkg.com/manual-data-masking"></script>
