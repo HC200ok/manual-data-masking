@@ -2,7 +2,7 @@
 <img src="./images/miss-mallard.png"  width="200"/ />
 </p>
 
-A super lightweight javascript library for manual data masking.
+A lightweight javascript library for manual data masking.
 
 <img src="./images/size.png"  />
 
