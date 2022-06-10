@@ -15,7 +15,7 @@ Imagine that there is a customer comment including sensitive data like swear wor
 e.g.
 
 ```html
-Damn it, The phone i just bought last week has been broken 😠, I need refund
+Damn it, The phone I just bought last week has been broken 😠, I need refund
 right now, Call me on this phone number: 080808080.
 ```
 
@@ -52,7 +52,7 @@ Data masked can be used to build a labeled data set for training data masking re
 Text after data masking:
 
 ```html
-*******, The phone i just bought last week has been broken 😠, I need refund
+*******, The phone I just bought last week has been broken 😠, I need refund
 right now, Call me on this phone number: *********.
 ```
 ## How to use in your project
