@@ -8,7 +8,7 @@ A lightweight javascript library for manual data masking.
 
 ## Manual data masking?
 
-Manual data masking is an operation that label and hide sensitive data, create new text that hides (masks) sensitive information.
+Manual data masking is an operation that labels and hides sensitive data, creates new text that hides (masks) sensitive information.
 
 Imagine that there is a customer comment including sensitive data like swear word, person name, home address...
 
