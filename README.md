@@ -2,7 +2,7 @@
 <img src="./images/miss-mallard.png"  width="200"/ />
 </p>
 
-A lightweight javascript library for manual data masking.
+`manual-data-masking` is a lightweight javascript library for manual data masking.
 
 <img src="./images/size.png"  />
 
