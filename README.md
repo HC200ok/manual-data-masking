@@ -6,7 +6,7 @@ A lightweight javascript library for manual data masking.
 
 <img src="./images/size.png"  />
 
-## Manual data masking?
+# Manual data masking?
 
 Manual data masking is an operation that labels and hides sensitive data, creates new text that hides (masks) sensitive information.
 
@@ -55,7 +55,7 @@ Text after data masking:
 *******, The phone I just bought last week has been broken 😠, I need refund
 right now, Call me on this phone number: *********.
 ```
-## How to use in your project
+# How to use
 
 ### ES modules
 
