@@ -19,7 +19,7 @@ Damn it, The phone I just bought last week has been broken 😠, I need refund
 right now, Call me on this phone number: 080808080.
 ```
 
-By using `manual-data-masking` you can do manual data masking job like this:
+By using `manual-data-masking` you can do a manual data masking job like this:
 
 <img src="./images/data-masking.gif"  />
 
