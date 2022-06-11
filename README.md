@@ -69,7 +69,7 @@ import { create as createManualDataMasking } from "manual-data-masking";
 const dataMasked = [
   {
     "content": "Damn it",
-    "category": "Person Name",
+    "category": "Swear word",
     "start": 0,
     "end": 7
   }
@@ -119,7 +119,7 @@ $manualDataMasking.on("afterDataMasking", (dataMasked, textAfterDataMasking) => 
   const dataMasked = [
     {
       content: "Damn it",
-      category: "Person Name",
+      category: "Swear word",
       start: 0,
       end: 7,
     },
