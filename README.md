@@ -35,7 +35,7 @@ Data masked:
 [
   {
     content: "Damn it",
-    category: "Person Name",
+    category: "Swear word",
     start: 0, // start index in text string
     end: 7, // start index in text string
   },
