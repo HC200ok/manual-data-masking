@@ -63,6 +63,10 @@ right now, Call me on this phone number: *********.
 npm install manual-data-masking
 ```
 
+```html
+<div id="demo"></div>
+```
+
 ```js
 import { create as createManualDataMasking } from "manual-data-masking";
 
@@ -114,6 +118,8 @@ $manualDataMasking.on("afterDataMasking", (dataMasked, textAfterDataMasking) => 
 
 ```html
 <script src="https://unpkg.com/manual-data-masking"></script>
+
+<div id="demo"></div>
 
 <script>
   const dataMasked = [
