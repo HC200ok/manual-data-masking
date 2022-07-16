@@ -37,7 +37,7 @@ Data masked:
     content: "Damn it",
     category: "Swear word",
     start: 0, // start index in text string
-    end: 7, // start index in text string
+    end: 7, // end index in text string
   },
   {
     content: "080808080",
