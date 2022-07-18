@@ -47,7 +47,7 @@ Data masked:
   },
 ];
 ```
-Data masked can be used to build a labeled dataset for training data masking related AI model.
+Data masked can be used to build a dataset for training data masking related NLP model.
 
 Text after data masking:
 
